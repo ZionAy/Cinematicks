@@ -1,0 +1,24 @@
+@using Microsoft.AspNetCore.Identity
+@using Cinematicks.Models
+
+@inject SignInManager<Client> SignInManager
+@inject UserManager<Client> UserManager
+
+
+<div id="user-greet">
+	<span>Hello, @(SignInManager.IsSignedIn(User) ? UserManager.GetUserName(User) : "Guest")!</span>
+</div>
+<div id="user-menu">
+	@if (SignInManager.IsSignedIn(User))
+	{
+		<a asp-area="" asp-controller="Profile" asp-action="Index">My Profile</a>
+		<form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+			<button type="submit" title="Logout"><i class="fa fa-sign-out"></i> Logout</button>
+		</form>
+	}
+	else
+	{
+		<a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+		<a asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+	}
+</div>

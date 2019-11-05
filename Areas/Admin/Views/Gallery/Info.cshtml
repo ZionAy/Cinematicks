@@ -1,0 +1,30 @@
+﻿@model PhotoGal
+
+@{
+	ViewData["Title"] = "Admin - Photo Info";
+}
+
+<div class="content-section">
+	<h2 class="content-title">@Model.Title</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<h3 class="content-subtitle">Photo details</h3>
+	<div class="row">
+		<div class="col-12 col-md-5 text-center">
+			<img class="img-fluid rounded" src="~/images/@Model.Photo.FilePath" alt="Our cinema" />
+		</div>
+		<div class="col-12 col-md-7 flex-col">
+			<span><strong>Title:</strong> @Model.Title</span>
+			<span><strong>Active:</strong> @Model.IsActive</span>
+			<span><strong>For cinema:</strong> @Model.Cinema.Name</span>
+			<span><strong>Description:</strong> @Model.Description</span>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<a asp-action="Index" class="btn btn-secondary">Back to list</a>
+<a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning mx-3">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-danger">Delete</a>
+

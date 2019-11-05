@@ -1,0 +1,74 @@
+﻿@model Cinema
+
+@{
+	ViewData["Title"] = "Admin - Create Cinema";
+}
+
+<div class="content-section">
+	<h2 class="content-title">Create new cinema</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<form asp-action="Create" role="form">
+		<div class="row">
+			<div asp-validation-summary="ModelOnly" class="col-12 text-danger"></div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-md-6">
+				<label asp-for="About" class="control-label"></label>
+				<textarea asp-for="About" rows="5" class="form-control"></textarea>
+				<span asp-validation-for="About" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="Price" class="control-label"></label>
+				<input asp-for="Price" class="form-control" />
+				<span asp-validation-for="Price" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-md-6">
+				<label asp-for="LocationID" class="control-label"></label>
+				<select asp-for="LocationID" class="form-control" asp-items="ViewBag.LocationID">
+					<option selected="selected" disabled="disabled">Choose Address...</option>
+				</select>
+				<span asp-validation-for="LocationID" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="PhotoID" class="control-label"></label>
+				<select id="admin-image-select" asp-for="PhotoID" class="form-control" asp-items="ViewBag.ImageID">
+					<option selected="selected" disabled="disabled">Choose Image...</option>
+				</select>
+				<span asp-validation-for="PhotoID" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div id="admin-image-preview" class="col-12 col-sm-6 col-md-4 col-lg-3"></div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 text-center">
+				<input type="submit" value="Create!" class="btn btn-success" />
+			</div>
+		</div>
+	</form>
+</div>
+
+<hr />
+
+<div>
+	<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

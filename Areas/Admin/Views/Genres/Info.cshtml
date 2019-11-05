@@ -1,0 +1,54 @@
+﻿@model Genre
+
+@{
+	ViewData["Title"] = "Admin - Genre Info";
+}
+
+
+<div class="content-section">
+	<h2 class="content-title">@Model.Name</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<h3 class="content-subtitle">Genre details</h3>
+	<div class="row mb-3">
+		<div class="col-12 col-md-6 flex-col">
+			<span><strong>Show in menu:</strong> @Model.InMenu.ToString()</span>
+			<span><strong>Description:</strong> @Model.Description</span>
+		</div>
+	</div>
+
+	<h3 class="content-subtitle">Movies</h3>
+	<div class="row justify-content-start">
+		<div class="col-12 col-md-6">
+			<table class="table table-sm table-hover">
+				<thead>
+					<tr>
+						<th>Poster</th>
+						<th>Details</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (MovGen mg in Model.Movies.Take(5))
+					{
+						<tr>
+							<td><img class="admin-table-img rounded" src="~/images/@mg.Movie.Poster.FilePath" alt="Movie poster" /></td>
+							<td class="flex-col">
+								<a asp-area="Admin" asp-controller="Movies" asp-action="Info" asp-route-id="@mg.Movie.ID">@mg.Movie.Title</a>
+								<span><strong>Rate:</strong> @mg.Movie.Rate.Code</span>
+								<span><strong>Director:</strong> @mg.Movie.Director</span>
+								<span><strong>Starring:</strong> @mg.Movie.Actors</span>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<a asp-action="Index" class="btn btn-secondary">Back to list</a>
+<a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning mx-3">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-danger">Delete</a>
+

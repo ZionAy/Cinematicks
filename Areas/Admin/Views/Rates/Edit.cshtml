@@ -1,0 +1,66 @@
+﻿@model Rate
+
+@{
+	ViewData["Title"] = "Admin - Edit Rate";
+}
+
+<div class="content-section">
+	<h2 class="content-title">Edit rate - @Model.Code</h2>
+	<hr />
+	<form asp-action="Edit" role="form">
+		<input type="hidden" asp-for="ID" />
+		<div class="row">
+			<div asp-validation-summary="ModelOnly" class="col-12 text-danger"></div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="Code" class="control-label"></label>
+				<input asp-for="Code" class="form-control" />
+				<span asp-validation-for="Code" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="MinAge" class="control-label"></label>
+				<input asp-for="MinAge" class="form-control" />
+				<span asp-validation-for="MinAge" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-md-6">
+				<label asp-for="Description" class="control-label"></label>
+				<input asp-for="Description" class="form-control" />
+				<span asp-validation-for="Description" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="ImageID" class="control-label"></label>
+				<select id="admin-image-select" asp-for="ImageID" class="form-control" asp-items="ViewBag.ImageID">
+					<option selected="selected" disabled="disabled">Choose Image...</option>
+				</select>
+				<span asp-validation-for="ImageID" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div id="admin-image-preview" class="col-12 col-sm-6 col-md-4 col-lg-3"></div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 text-center">
+				<input type="submit" value="Save!" class="btn btn-success" />
+			</div>
+		</div>
+	</form>
+</div>
+
+<hr />
+
+<div>
+	<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

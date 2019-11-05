@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<Client> SignInManager
+@inject UserManager<Client> UserManager
+
+@model Review
+
+@if (SignInManager.IsSignedIn(User))
+{
+	<div>
+		<button type="button" data-toggle="collapse" data-target="#add-review" aria-expanded="false" aria-controls="add-review" class="btn btn-primary mb-3">Add Review</button>
+	</div>
+	<div class="collapse" id="add-review">
+		<form asp-area="" asp-controller="Movies" asp-action="AddReview" role="form" method="post">
+			<div class="row">
+				<div class="col-12 col-md-8 col-lg-6">
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+					<input type="hidden" asp-for="MovieID" />
+					<input type="hidden" asp-for="ClientID" value="@UserManager.GetUserId(User)" />
+					<div class="form-group">
+						<label asp-for="Comment" class="form-label-hidden"></label>
+						<textarea asp-for="Comment" rows="5" class="form-control"></textarea>
+						<span asp-validation-for="Comment" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="Rating" class="form-label-hidden"></label>
+						<select asp-for="Rating" class="form-control">
+							<option selected="selected" disabled="disabled">Star Rating...</option>
+							<option value="1">1 Star</option>
+							<option value="2">2 Stars</option>
+							<option value="3">3 Stars</option>
+							<option value="4">4 Stars</option>
+							<option value="5">5 Stars</option>
+							<option value="6">6 Stars</option>
+							<option value="7">7 Stars</option>
+							<option value="8">8 Stars</option>
+							<option value="9">9 Stars</option>
+							<option value="10">10 Stars</option>
+						</select>
+						<span asp-validation-for="Rating" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<input type="submit" value="Send" class="btn btn-success" />
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+}
+
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

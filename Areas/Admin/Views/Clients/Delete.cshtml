@@ -1,0 +1,47 @@
+﻿@model Client
+
+@inject UserManager<Client> UserManager
+
+@{
+	ViewData["Title"] = "Admin - Delete Client";
+}
+
+<div class="content-section">
+	<h2 class="content-title">Delete client</h2>
+	<hr />
+	<h3 class="content-subtitle">Client details</h3>
+	<div class="row">
+		<div class="col-12 col-md-6">
+			<div class="admin-delete-details">
+				<span><strong>Username:</strong> @Model.UserName</span>
+				<span><strong>Email:</strong> @Model.Email</span>
+				<span><strong>Confirmed user:</strong> @Model.EmailConfirmed.ToString()</span>
+				@if (await UserManager.IsInRoleAsync(Model, "Admin"))
+				{
+					<span><strong>This user is an administrator.</strong></span>
+				}
+				<span><strong>Orders:</strong> @Model.Orders.Count</span>
+				<span><strong>Reviews:</strong> @Model.Reviews.Count</span>
+				<span><strong>Avatar:</strong></span>
+				<div>
+					<img class="img-fluid" src="~/images/@Model.Avatar.FilePath" />
+				</div>				
+			</div>
+		</div>
+		<hr />
+		<div class="col-12 text-center">
+			<h3>Are you sure you want to delete this?</h3>
+			<form asp-action="Delete">
+				<input type="hidden" asp-for="Id" />
+				<input type="submit" value="Delete" class="btn btn-danger" />
+			</form>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<div>
+	<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+

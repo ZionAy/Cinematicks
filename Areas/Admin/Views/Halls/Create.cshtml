@@ -1,0 +1,60 @@
+﻿@model Hall
+
+@{
+	ViewData["Title"] = "Admin - Create Hall";
+}
+
+<div class="content-section">
+	<h2 class="content-title">Create new hall</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<form asp-action="Create" role="form">
+		<div class="row">
+			<div asp-validation-summary="ModelOnly" class="col-12 text-danger"></div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-3 col-lg-2">
+				<label asp-for="Rows" class="control-label"></label>
+				<input asp-for="Rows" class="form-control" />
+				<span asp-validation-for="Rows" class="text-danger"></span>
+			</div>
+			<div class="form-group col-12 col-sm-6 col-md-3 col-lg-2">
+				<label asp-for="Cols" class="control-label"></label>
+				<input asp-for="Cols" class="form-control" />
+				<span asp-validation-for="Cols" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-md-6">
+				<label asp-for="CinemaID" class="control-label"></label>
+				<select asp-for="CinemaID" class="form-control" asp-items="ViewBag.CinemaID">
+					<option selected="selected" disabled="disabled">Choose Cinema...</option>
+				</select>
+				<span asp-validation-for="CinemaID" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 text-center">
+				<input type="submit" value="Create!" class="btn btn-success" />
+			</div>
+		</div>
+	</form>
+</div>
+
+<hr />
+
+<div>
+	<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

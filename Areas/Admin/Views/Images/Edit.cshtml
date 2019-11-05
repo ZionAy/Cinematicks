@@ -1,0 +1,54 @@
+﻿@model EditImageViewModel
+
+@{
+	ViewData["Title"] = "Admin - Edit Image";
+}
+
+
+<div class="content-section">
+	<h2 class="content-title">Edit image - @Model.Name</h2>
+	<hr />
+	<form asp-action="Edit" role="form" enctype="multipart/form-data">
+		<input type="hidden" asp-for="ID" />
+		<div class="row">
+			<div asp-validation-summary="ModelOnly" class="col-12 text-danger"></div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="Category" class="control-label"></label>
+				<select asp-for="Category" asp-items="@ViewBag.Categories" class="form-control"></select>
+				<span asp-validation-for="Category" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="Upload" class="control-label"></label>
+				<input asp-for="Upload" type="file" class="form-control" />
+				<span asp-validation-for="Upload" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 text-center">
+				<input type="submit" value="Save!" class="btn btn-success" />
+			</div>
+		</div>
+	</form>
+</div>
+
+<hr />
+
+<div>
+	<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

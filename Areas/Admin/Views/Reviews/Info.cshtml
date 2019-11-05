@@ -1,0 +1,34 @@
+﻿@model Review
+
+@{
+	ViewData["Title"] = "Admin - Review Info";
+}
+
+
+<div class="content-section">
+	<h2 class="content-title">Review #@Model.ID</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<h3 class="content-subtitle">Review details</h3>
+	<div class="row">
+		<div class="col-12 col-md-4 text-center">
+			<img class="img-fluid rounded" src="~/images/@Model.Movie.Poster.FilePath" alt="movie poster" />
+		</div>
+		<div class="col-12 col-md-8 flex-col">
+			<span><strong>Client:</strong> @Model.Client.UserName</span>
+			<span><strong>Movie:</strong> @Model.Movie.Title</span>
+			<span><strong>Posted on:</strong> @Model.PostTime.ToString("dd/MM/yyyy HH:mm")</span>
+			<span><strong>Rating:</strong> @Model.Rating</span>
+			<stars rating="@Model.Rating"></stars>
+			<span><strong>Comment:</strong></span>
+			<multiline text="@Model.Comment"></multiline>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<a asp-action="Index" class="btn btn-secondary">Back to list</a>
+<a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning mx-3">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-danger">Delete</a>
+

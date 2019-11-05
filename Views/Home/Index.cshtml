@@ -1,0 +1,111 @@
+﻿@model Cinematicks.ViewModels.IndexViewModel
+
+@{
+	ViewData["Title"] = "Home";
+	int sliderActive = 1;
+}
+
+<div class="content-section">
+	<h2 class="content-title">Coming soon</h2>
+	<div id="soon-slider">
+		@foreach (Movie movie in Model.ComingSoon)
+		{
+			<div class="movie-card">
+				<div class="movie-card-body">
+					<div class="movie-card-front">
+						<img class="img-fluid" src="~/images/@movie.Poster.FilePath" alt="@movie.Title Poster" />
+						<div class="movie-card-img-text">
+							<p>@movie.Release.ToString("dd/MM/yyyy")</p>
+						</div>
+					</div>
+					<div class="movie-card-back">
+						<div class="movie-card-info">
+							<h3 class="movie-card-item movie-card-name">@movie.Title</h3>
+							<p class="movie-card-item movie-card-genres">
+								@foreach (MovGen mg in movie.Genres)
+								{
+									<span>
+										<a asp-area="" asp-controller="Movies" asp-action="Genre" asp-route-id="@mg.GenreID">@mg.Genre.Name</a>
+									</span>
+								}
+							</p>
+							<p class="movie-card-item movie-card-ratetime">
+								<img src="~/images/@movie.Rate.Image.FilePath" alt="Movie rate" title="@movie.Rate.Description" />
+								<span>@movie.Time mins</span>
+							</p>
+							<p class="movie-card-item movie-card-people">
+								<span><strong>Director:</strong> @movie.Director</span>
+								<span><strong>Starring:</strong> @movie.Actors</span>
+							</p>
+							<div class="movie-card-item movie-card-plot">
+								<span><strong>Plot:</strong></span>
+								<multiline text="@movie.Plot"></multiline>
+							</div>
+							<div class="movie-card-buttons">
+								<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modal-trailer" data-youtube="@movie.Trailer" title="Watch trailer">
+									<i class="fa fa-youtube-play"></i> Trailer
+								</button>
+								<a asp-area="" asp-controller="Movies" asp-action="Movie" asp-route-id="@movie.ID" class="btn btn-outline-info">
+									<i class="fa fa-info-circle"></i> Info
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+
+<div class="content-section">
+	<h2 class="content-title">On Theatres</h2>
+	<div class="row justify-content-center">
+		@foreach (Movie movie in Model.ShowingNow)
+		{
+			<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+				@Html.Partial("_MovieCard", movie)
+			</div>
+		}
+	</div>
+</div>
+
+
+<div class="content-section">
+	<h2 class="content-title">Top reviews</h2>
+	<div class="row justify-content-center">
+		<div class="col-12 col-md-10 col-lg-8">
+			<div class="content-box carousel slide" data-ride="carousel">
+				<div class="carousel-inner">
+					@foreach (Review review in Model.TopReviews)
+					{
+						<div class="carousel-item @(sliderActive-- == 1 ? "active" : "")">
+							<div class="row">
+								<div class="col-4 col-md-3">
+									<img class="img-fluid" src="~/images/@review.Movie.Poster.FilePath" alt="Movie Poster" />
+								</div>
+								<div class="col-8 col-md-9 review-card">
+									<h3 class="review-card-title">@review.Movie.Title</h3>
+									<stars rating="@review.Rating" class="review-card-stars"></stars>
+									<multiline text="@review.Comment" class="review-card-comment"></multiline>
+									<div class="review-card-user">
+										<img src="~/images/@review.Client.Avatar.FilePath" alt="User avatar" />
+										<span class="review-card-user-name">@review.Client.UserName</span>
+										<span class="review-card-user-time">@review.PostTime.ToString("dd/MM/yyyy HH:mm")</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section SlickSlider {
+	@{await Html.RenderPartialAsync("_SlickSlider");}
+}
+@section ModalTrailer {
+	@{await Html.RenderPartialAsync("_ModalTrailer");}
+}

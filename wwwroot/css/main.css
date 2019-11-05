@@ -1,0 +1,723 @@
+﻿/* General definitions */
+html {
+	font-family: 'Varela Round', sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+}
+body {
+	font-family: 'Varela Round', sans-serif;
+	font-size: 1rem;
+	font-weight: 400; /* Regular */
+	line-height: 1.5;
+	color: #040404; /* Default text color */
+}
+a, a:hover {
+	text-decoration: none; /* No underlines for links */
+	cursor: pointer;
+}
+
+
+/* Layout definitions */
+#site-wrapper {
+	background-color: #efefef;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+
+/* Site header */
+#site-header {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: stretch;
+	justify-content: space-between;
+	padding: 0.5rem;
+	background-color: #2c3e50;
+	color: #ffffff;
+	font-weight: bold;
+}
+#site-logo {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+}
+#site-logo > img {
+	width: 5rem;
+	height: 5rem;
+}
+#site-logo > h1 {
+	margin: 0;
+	padding: 0 0.25rem;
+	font-size: 3rem;
+	font-weight: bold;
+	color: #bbdefb;
+}
+#site-footer {
+	text-align: center;
+	font-size: 1.25rem;
+	font-weight: bold;
+	padding: 1rem;
+	background-color: #2c3e50;
+	color: #ffffff;
+	margin-bottom: 1rem;
+}
+
+
+/* Client nav (part of site header) */
+#user-nav {
+	display: flex;
+	flex-flow: column;
+	align-self: flex-end;
+	padding-right: 0.5rem;
+}
+#user-greet {
+	text-align: center;
+	font-size: 1.125rem;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+	color: #bbdefb;
+}
+#user-menu {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: baseline;
+}
+#user-menu > div {
+	background-color: #2c3e50;
+}
+#user-menu > a:first-child {
+	margin-right: 1rem;
+}
+#user-menu button {
+	border: 0 solid transparent;
+	background-color: transparent;
+	padding: 0;
+	cursor: pointer;
+	margin: 0 0.5rem;
+}
+#user-menu a, #user-menu button {
+	color: #CFD8DC;
+	font-size: 1.125rem;
+	font-weight: bold;
+}
+#user-menu a:hover, #user-menu button:hover {
+	color: #78909C;
+}
+
+
+/* Site top navigation - site navigation */
+#site-nav {
+	background: linear-gradient(#95a5a6,#bdc3c7,#ecf0f1);
+}
+#site-nav .navbar-toggler {
+	color: #070707;
+	font-weight: bold;
+	font-size: 1.25rem;
+}
+#main-nav a {
+	color: #070707;
+	font-weight: bold;
+	font-size: 1.125rem;
+}
+#site-nav .navbar-toggler:hover, #main-nav a:hover {
+	color: #d92b35;
+}
+
+
+/* Search form (Part of top nav) */
+.search-form {
+	display: inline-flex;
+	flex-flow: row nowrap;
+	align-items: stretch;
+	line-height: 2;
+	border: 1px solid #bdc3c7;
+	border-radius: 0.25rem;
+	margin-left: auto;
+}
+.search-control {
+	display: block;
+	width: auto;
+	padding: 0.25rem 0.5rem;
+	font-size: 1rem;
+	background-color: #fff;
+	color: #495057;
+	background-clip: padding-box;
+	border: 0;
+	border-right: 1px solid #bdc3c7;
+}
+.search-form .search-control:first-child {
+	border-radius: 0.25rem 0 0 0.25rem;
+}
+.search-button {
+	border-radius: 0 0.25rem 0.25rem 0;
+	display: block;
+	width: auto;
+	padding: 0.25rem 0.5rem;
+	font-size: 1rem;
+	background-clip: padding-box;
+	border: 0;
+}
+.search-control:focus {
+	outline: 0;
+}
+@media (min-width: 768px) { /* break the search form to next line to keep menu ok. */
+	#main-nav {
+		flex-wrap: wrap;
+	}
+}
+/* This css spec is for parent focus. It's not supported on all browsers yet. 
+.search-form:focus-within {
+	border: 1px solid #80bdff;
+	box-shadow: 0 0 0 0.125rem rgba(0, 123, 255, 0.25);
+}
+*/
+
+
+/* This is for search page */
+.search-filter-bar {
+	font-size: 1.375rem;
+	margin-bottom: 0.375rem;
+	color: #455A64;
+}
+
+
+/* Pages layout */
+#site-content {
+	background-color: #ecf0f1;
+	padding: 0.5rem 1rem;
+}
+.content-section {
+	margin-top: 0.5rem;
+	margin-bottom: 1rem;
+}
+.content-title {
+	font-size: 2rem;
+	font-weight: bold;
+	color: #0285a1;
+}
+.content-box {
+	border: 1px solid #b0bec5;
+	margin: 1rem 0.125rem;
+	padding: 0.25rem;
+	border-radius: 0.25rem;
+	box-shadow: 0.25rem 0.25rem 2rem 0.25rem #7f8c8d;
+}
+.content-subtitle {
+	color: #e57373;
+	font-size: 1.375rem;
+	font-weight: bold;
+}
+
+
+/* Movie card */
+.movie-card {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	max-width: 15rem;
+	margin: 0 auto 1rem;
+}
+.movie-card-header {
+	background-color: #42A5F5;
+	text-align: center;
+	font-size: 1.25rem;
+	font-weight: bold;
+	color: #000;
+	padding: 0.25rem;
+	margin: 0;
+	border-radius: 0.25rem 0.25rem 0 0;
+}
+.movie-card-body {
+	position: relative;
+}
+.movie-card-front {
+	z-index: 2;
+}
+.movie-card-back {
+	z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: #d5e2eb;
+	transform: rotateY(180deg);
+	overflow-y: hidden;
+	padding: 0.375rem;
+}
+.movie-card-front, .movie-card-back {
+	backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	transition: transform 0.8s;
+}
+.movie-card-body:hover .movie-card-front {
+	transform: rotateY(180deg);
+}
+.movie-card-body:hover .movie-card-back {
+	transform: rotateY(0deg);
+}
+.movie-card-img-text {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: rgba(0,0,0,0.7);
+}
+.movie-card-img-text > p {
+	font-size: 1rem;
+	font-weight: bold;
+	text-align: center;
+	color: #0091EA;
+	margin: 0;
+	padding: 0.125rem;
+}
+.movie-card-info {
+	display: flex;
+	flex-direction: column;
+}
+.movie-card-item {
+	margin-bottom: 0.125rem;
+	font-size: 0.875rem;
+}
+.movie-card-name {
+	font-size: 1.125rem;
+	font-weight: bold;
+	color: #EC407A;
+	text-align: center;
+	border-bottom: 1px solid #B0BEC5;
+}
+.movie-card-genres {
+	font-size: 1rem;
+	font-weight: bold;
+	text-align: center;
+}
+.movie-card-genres > span > a {
+	color: #1565c0;
+}
+.movie-card-genres > span:not(:first-child):before {
+	content: " | ";
+	color: #000;
+}
+.movie-card-ratetime {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: center;
+}
+.movie-card-ratetime > img {
+	height: 1rem;
+	width: auto;
+	margin-right: 1rem;
+}
+.movie-card-people {
+	display: flex;
+	flex-direction: column;
+}
+.movie-card-people > span {
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.movie-card-plot {
+	display: flex;
+	flex-direction: column;
+	padding-top: 0.125rem;
+}
+.movie-card-buttons {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	align-items: center;
+	padding-top: 0.125rem;
+	padding-bottom: 0.125rem;
+	background-color: #d5e2eb;
+}
+.movie-card-buttons .btn {
+	line-height: 1.25;
+}
+.movie-card-footer {
+	background-color: #cfd8dc;
+	border-radius: 0 0 0.25rem 0.25rem;
+	padding: 0.25rem;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	align-items: center;
+}
+.movie-card-reviews {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: center;
+	color: #FFB300;
+}
+.movie-card-reviews > span {
+	margin: 0 0.5rem;
+}
+
+
+/* Review card (for slider) */
+.review-card {
+	display: flex;
+	flex-direction: column;
+}
+.review-card-title {
+	font-size: 1.375rem;
+	font-weight: bold;
+	color: #2196F3;
+	margin-bottom: 0.125rem;
+}
+.review-card-stars {
+	font-size: 0.875rem;
+	margin-bottom: 0.25rem;
+}
+.review-card-stars i, .movie-review-details i {
+	padding-right: 0.125rem;
+}
+.full-stars {
+	color: #FBC02D;
+}
+.empty-stars {
+	color: #9E9E9E;
+}
+.review-card-comment {
+	margin-bottom: 0.375rem;
+}
+.review-card-user {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	background-color: #E0E0E0;
+	border-radius: 1.25rem;
+	margin-top: 0.25rem;
+}
+.review-card-user > img {
+	height: 2rem;
+	width: 2rem;
+	border-radius: 50%;
+	background-color: #ffffff;
+}
+.review-card-user-name {
+	font-weight: bold;
+	margin: 0 0.5rem;
+}
+.review-card-user-time {
+	font-size: 0.875rem;
+	color: grey;
+}
+
+
+/* Site gallery (Info page) */
+#site-gallery {
+	border: 2px solid #424242;
+	border-radius: 0.5rem;
+}
+#gallery-main {
+	padding: 0.5rem;
+}
+#gallery-nav {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: stretch;
+	padding: 0.25rem 0.5rem;
+}
+.gallery-photo {
+	width: 100%;
+	height: auto;
+	border-radius: 0.5rem;
+}
+.gallery-photo-title {
+	font-size: 1.25rem;
+	font-weight: bold;
+	color: #F06292;
+	margin: 0.25rem;
+}
+.gallery-photo-desc {
+	color: #757575;
+	margin: 0.25rem;
+}
+.gallery-menu-item {
+	display: block;
+	width: 7.5rem;
+	margin: 0.25rem;
+}
+.gallery-menu-item img {
+	border-color: #616161;
+}
+
+
+/* Promos details (Promos page) */
+.promo-info, .promo-dates {
+	margin-bottom: 0.25rem;
+}
+
+
+/* Movie Info Page */
+.movie-details {
+	display: flex;
+	flex-direction: column;
+}
+.movie-details-item {
+	margin-bottom: 0.25rem;
+}
+.movie-details-item > strong {
+	margin-right: 0.25rem;
+	font-size: 1.125rem;
+	font-weight: bold;
+}
+.movie-details-genre > a {
+	font-size: 1.125rem;
+	font-weight: bold;
+	color: #1565c0;
+}
+.movie-details-genre:not(:last-child):after {
+	content: " | ";
+	color: #000;
+}
+.movie-details-divider {
+	margin: 0.5rem 0;
+}
+.movie-review-item {
+	margin-bottom: 0.5rem;
+	padding: 0.5rem;
+}
+.movie-review-item > img {
+	width: 8rem;
+	height: 8rem;
+	margin-right: 1rem;
+	border-radius: 50%;
+}
+.movie-review-details {
+	margin-bottom: 0.125rem;
+}
+.movie-review-client {
+	font-size: 1.125rem;
+	font-weight: bold;
+	margin-right: 1rem;
+}
+.movie-review-date {
+	font-size: 0.875rem;
+	color: grey;
+}
+
+
+/* Order by client */
+.order-directions {
+	font-weight: bold;
+}
+.order-steps-bar {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	font-size: 1.125rem;
+	font-weight: bold;
+	color: #bdc3c7;
+}
+.order-step {
+	border-bottom: 2px solid #bdc3c7;
+	padding: 0 2rem;
+}
+.order-step.active {
+	color: #1565C0;
+	border-bottom: 2px solid #1565C0;
+}
+.order-filter-item {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	margin-bottom: 0.125rem;
+}
+
+/* Order shows table */
+.order-table-header {
+	align-items: center;
+	font-size: 1.125rem;
+	font-weight: bold;
+}
+.order-table-date {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+}
+.order-table-shows {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.btn-date {
+	padding: 0 0.75rem;
+	color: #F48FB1;
+}
+.btn-date:hover {
+	text-decoration: none;
+	color: #D81B60;
+}
+.order-table-item {
+	font-weight: bold;
+	padding: 0.25rem 0.5rem;
+	margin-right: 1rem;
+	background-image: url('../images/System/showItemBG.png');
+	background-size: 100% 100%;
+}
+.order-table-item:hover {
+	background-image: url('../images/System/showItemBGHover.png');
+}
+.order-table-item > a {
+	color: #000000;
+}
+.order-table-item:hover > a {
+	color: #ffffff;
+}
+
+/* Order Seats and payment */
+.order-show-info {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1rem;
+}
+.seats-indicators {
+	display: flex;
+	flex-flow: row nowrap;
+}
+.seats-indicators > p {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	margin: 0 1rem 1rem 0;
+}
+.seat-indicator {
+	display: block;
+	height: 1.25rem;
+	width: 1.25rem;
+	margin-right: 0.25rem;
+	border-radius: 50%;
+}
+.empty-seat, input[type="checkbox"] + label {
+	background-color: #b9dc74;
+}
+.taken-seat, input[type="checkbox"]:disabled + label {
+	background-color: #e57373;
+}
+.yours-seat, input[type="checkbox"]:checked + label {
+	background-color: #8a8a8a;
+}
+.seats-hall-table {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+}
+.seat-screen {
+	display: block;
+	width: 10rem;
+	background-color: #000000;
+	color: #ffffff;
+	font-weight: bold;
+	padding: 0.125rem;
+	margin: 0 auto 0.5rem;
+	text-align: center;
+}
+.seat-cell {
+	text-align: center;
+	vertical-align: middle;
+}
+input[type="checkbox"] + label {
+	width: 2.25rem;
+	height: 2.25rem;
+	display: table-cell;
+	vertical-align: middle;
+}
+input[type="checkbox"]:not(:disabled) + label:hover {
+	cursor: pointer;
+}
+
+
+/* Contact us page */
+#contact-us-page {
+	background-color: #BBDEFB;
+	padding: 1rem 0.5rem;
+}
+.contact-info {
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+.contact-info-icon {
+	font-size: 2rem;
+}
+.contact-info-title {
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+.contact-info-link {
+	font-size: 1.125rem;
+	font-weight: bold;
+	color: #1E88E5;
+}
+
+/* My profile section */
+#profile-nav {
+	background-color: #CFD8DC;
+	padding: 0.5rem;
+}
+.profile-nav-item {
+	font-size: 1.125rem;
+	font-weight: bold;
+	color: #263238;
+	background-color: transparent;
+}
+.profile-nav-item:hover {
+	color: #ECEFF1;
+	background-color: #263238;
+}
+.profile-title {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #e57373;
+}
+.profile-subtitle {
+	font-size: 1.25rem;
+	font-weight: bold;
+	color: #0288D1;
+}
+
+
+/* FAQ page */
+#faq-section {
+	margin: 1rem 0.25rem;
+}
+.faq-qa {
+	margin-bottom: 1.5rem;
+}
+.faq-question {
+	font-size: 1.375rem;
+	font-weight: bold;
+	cursor: pointer;
+	margin-bottom: 0.5rem;
+}
+.faq-answer {
+	font-size: 1.125rem;
+	font-weight: 500;
+	padding-left: 0.5rem;
+}
+
+/* Helpers */
+/* Form labels hidden */
+.form-label-hidden {
+	display: none;
+}
+
+/* Flex-box column */
+.flex-col {
+	display: flex;
+	flex-direction: column;
+}
+
+.status-alert {
+	font-weight: bold;
+}

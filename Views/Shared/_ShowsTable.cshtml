@@ -1,0 +1,128 @@
+﻿@model OrderShowsViewModel
+
+@{
+	int halls = (Model.ShowHalls != null) ? 1 : 0;
+}
+
+<h3 class="content-subtitle">Shows list for @Model.ShowMovie</h3>
+<table class="table table-responsive-md">
+	<thead>
+		<tr>
+			<th scope="col" class="order-table-header">@(halls == 1 ? "Hall" : "Time")</th>
+			<th scope="col" class="order-table-header" colspan="4">
+				<div class="order-table-date">
+					<input id="order-prev-day" type="button" value="<<<" data-date="@Model.ShowDate.AddDays(-1).ToString("yyyy-MM-dd")" class="btn btn-link btn-date" />
+					<span>@Model.ShowDate.ToString("dd/MM/yyyy")</span>
+					<input id="order-next-day" type="button" value=">>>" data-date="@Model.ShowDate.AddDays(1).ToString("yyyy-MM-dd")" class="btn btn-link btn-date" />
+				</div>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (halls == 1)
+		{
+			foreach (var item in Model.ShowHalls)
+			{
+				<tr>
+					<th scope="row" class="order-table-header">@item.Key.Name</th>
+					<td colspan="4">
+						<div class="order-table-shows">
+						@foreach (var showItem in item.Value)
+						{
+							<span class="order-table-item">
+								<a asp-area="" asp-controller="Order" asp-action="New" asp-route-id="@showItem.ID">@showItem.Text</a>
+							</span>
+						}
+						</div>
+					</td>
+				</tr>
+			}
+		}
+		else
+		{
+			foreach (var item in Model.ShowTimes)
+			{
+				<tr>
+					<th scope="row">@item.Key.ToString(@"hh\:mm")</th>
+					<td colspan="4">
+						<div class="order-table-date">
+						@foreach (var showItem in item.Value)
+						{
+							<span class="order-table-item">
+								<a asp-area="" asp-controller="Order" asp-action="New" asp-route-id="@showItem.ID">@showItem.Text</a>
+							</span>
+						}
+						</div>
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>
+
+
+
+
+
+
+@*@model OrderShowsViewModel
+
+@{
+	int halls = (Model.ShowHalls != null) ? 1 : 0;
+}
+
+<h3 class="content-subtitle">Shows list for @Model.ShowMovie</h3>
+<div class="row align-items-center">
+	<div class="col-4 col-md-3 col-lg-2">
+		<span>@(halls == 1 ? "Hall Name" : "Show Time")</span>
+	</div>
+	<div class="col-8 col-md-9 col-lg-10">
+		<div class="order-table-date">
+			<input id="order-prev-day" type="button" value="<<<" data-date="@Model.ShowDate.AddDays(-1).ToString("yyyy-MM-dd")" class="btn btn-default btn-date" />
+			<span>@Model.ShowDate.ToString("dd/MM/yyyy")</span>
+			<input id="order-next-day" type="button" value=">>>" data-date="@Model.ShowDate.AddDays(1).ToString("yyyy-MM-dd")" class="btn btn-default btn-date" />
+		</div>
+	</div>
+	@if (halls == 1)
+	{
+		foreach (var item in Model.ShowHalls)
+		{
+			<div class="col-4 col-md-3 col-lg-2">
+				<span>@item.Key.Name</span>
+			</div>
+			<div class="col-8 col-md-9 col-lg-10">
+				<div class="order-table-date">
+					@foreach (var showItem in item.Value)
+					{
+						<span class="order-table-item">
+							<a asp-area="" asp-controller="Order" asp-action="New" asp-route-id="@showItem.ID">@showItem.Text</a>
+						</span>
+					}
+				</div>
+			</div>
+		}
+	}
+	else
+	{
+		foreach (var item in Model.ShowTimes)
+		{
+			<div class="col-4 col-md-3 col-lg-2">
+				<span>@item.Key.ToString(@"hh\:mm")</span>
+			</div>
+			<div class="col-8 col-md-9 col-lg-10">
+				<div class="order-table-date">
+					@foreach (var showItem in item.Value)
+					{
+						<span class="order-table-item">
+							<a asp-area="" asp-controller="Order" asp-action="New" asp-route-id="@showItem.ID">@showItem.Text</a>
+						</span>
+					}
+				</div>
+			</div>
+		}
+	}
+</div>*@
+
+
+
+

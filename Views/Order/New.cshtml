@@ -1,0 +1,189 @@
+﻿@model MakeOrderViewModel
+
+
+@inject SignInManager<Client> SignInManager
+@inject UserManager<Client> UserManager
+
+
+@{
+	ViewData["Title"] = "Order - Choose Seats";
+	var hallRows = Model.ChosenShow.Hall.Rows;
+	var hallCols = Model.ChosenShow.Hall.Cols;
+}
+
+<div class="content-section">
+	<h2 class="content-title">Order Tickets</h2>
+	@Html.Partial("_Alert")
+	<h3 class="content-subtitle">Choose Seats &amp; Payment</h3>
+	<p class="border-info order-directions">
+		This is the hall view.<br />
+		Please choose your seats.<br />
+		Click on an empty seat to choose the seat.<br />
+		After choosing the seats, fill in the credit card info and click order.
+	</p>
+	<hr />
+
+	<!-- Steps bar -->
+	<div class="order-steps-bar d-none d-md-flex mb-3">
+		<span class="order-step">
+			<i class="fa fa-ticket"></i> Choose show
+		</span>
+		<span class="order-step active">
+			<i class="fa fa-ticket"></i> Choose seats &amp; Payment
+		</span>
+		<span class="order-step">
+			<i class="fa fa-ticket"></i> Invoice
+		</span>
+	</div>
+
+	<h3 class="content-subtitle">Show info</h3>
+	<div class="order-show-info">
+		<span><strong>Movie:</strong> @Model.ChosenShow.Movie.Title</span>
+		<span><strong>Hall:</strong> @Model.ChosenShow.Hall.Name</span>
+		<span><strong>Date:</strong> @Model.ChosenShow.ShowDate.ToString("dd/MM/yyyy")</span>
+		<span><strong>Time:</strong> @Model.ChosenShow.ShowTime.ToString(@"hh\:mm")</span>
+	</div>
+
+	<h3 class="content-subtitle">Choose your seats</h3>
+	<div class="seats-indicators">
+		<p>
+			<span class="seat-indicator empty-seat"></span>
+			<span>Available</span>
+		</p>
+		<p>
+			<span class="seat-indicator taken-seat"></span>
+			<span>Taken</span>
+		</p>
+		<p>
+			<span class="seat-indicator yours-seat"></span>
+			<span>Yours</span>
+		</p>
+	</div>
+
+	<form asp-action="New" role="form">
+		<input type="hidden" name="showID" value="@Model.ChosenShow.ID" />
+		<div class="seats-hall-table">
+			<table class="table-hover mb-3">
+				<thead>
+					<tr>
+						<th></th>
+						<th colspan="@hallCols"><span class="seat-screen">Screen</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					@for (var i = 1; i <= hallRows; i++)
+					{
+						<tr>
+							<th><span class="mr-3">@Convert.ToChar(i + 64)</span></th>
+							@for (var j = 1; j <= hallCols; j++)
+							{
+								<td class="seat-cell">
+									<input id="seat-@i-@j" type="checkbox" hidden name="Seats" value="@i-@j" @(Model.TakenSeats.Any(t => t.Row == i && t.Col == j) ? "disabled" : "") class="seat-status" />
+									<label class="seat-box" for="seat-@i-@j" data-seat="@Convert.ToChar(i+64)@j">@Convert.ToChar(i + 64)@j</label>
+								</td>
+							}
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+
+		<h3 class="content-subtitle">Payment details</h3>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="FirstName" class="control-label"></label>
+				<input asp-for="FirstName" class="form-control" />
+				<span asp-validation-for="FirstName" class="text-danger"></span>
+			</div>
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="LastName" class="control-label"></label>
+				<input asp-for="LastName" class="form-control" />
+				<span asp-validation-for="LastName" class="text-danger"></span>
+			</div>
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="CCID" class="control-label"></label>
+				<input asp-for="CCID" class="form-control" />
+				<span asp-validation-for="CCID" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="CCNum" class="control-label"></label>
+				<input asp-for="CCNum" class="form-control" />
+				<span asp-validation-for="CCNum" class="text-danger"></span>
+			</div>
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="CCCVV" class="control-label"></label>
+				<input asp-for="CCCVV" class="form-control" />
+				<span asp-validation-for="CCCVV" class="text-danger"></span>
+			</div>
+			<div class="form-group col-6 col-sm-3 col-md-2">
+				<label asp-for="CCMonth" class="control-label"></label>
+				<input asp-for="CCMonth" class="form-control" />
+				<span asp-validation-for="CCMonth" class="text-danger"></span>
+			</div>
+			<div class="form-group col-6 col-sm-3 col-md-2">
+				<label asp-for="CCYear" class="control-label"></label>
+				<input asp-for="CCYear" class="form-control" />
+				<span asp-validation-for="CCYear" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-md-6">
+				<label asp-for="Address" class="control-label"></label>
+				<input asp-for="Address" class="form-control" />
+				<span asp-validation-for="Address" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-8 col-md-4">
+				<label asp-for="City" class="control-label"></label>
+				<input asp-for="City" class="form-control" />
+				<span asp-validation-for="City" class="text-danger"></span>
+			</div>
+			<div class="form-group col-4 col-md-2">
+				<label asp-for="ZipCode" class="control-label"></label>
+				<input asp-for="ZipCode" class="form-control" />
+				<span asp-validation-for="ZipCode" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12">
+				<div class="checkbox">
+					<label>
+						<input asp-for="SendInvoice" /> @Html.DisplayNameFor(model => model.SendInvoice)
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<!-- Admin Can order for clients -->
+		@if (SignInManager.IsSignedIn(User))
+		{
+			var client = await UserManager.GetUserAsync(User);
+			var isAdmin = await UserManager.IsInRoleAsync(client, "Admin");
+			if (isAdmin)
+			{
+				<h3 class="content-subtitle">Choose client (For admins only)</h3>
+				<div class="row">
+					<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+						<label for="client" class="control-label">Client Email</label>
+						<input type="email" name="client" class="form-control" />
+						<span class="text-secondary">* Leave blank for self order.</span>
+					</div>
+				</div>
+			}
+		}
+
+		<div class="form-group row mt-3">
+			<div class="col d-flex justify-content-center">
+				<input type="submit" value="Order!" class="btn btn-success" />
+			</div>
+		</div>
+	</form>
+</div>
+
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

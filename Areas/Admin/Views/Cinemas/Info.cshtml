@@ -1,0 +1,105 @@
+﻿@model Cinema
+
+@{
+	ViewData["Title"] = "Admin - Cinema Info";
+}
+
+<div class="content-section">
+	<h2 class="content-title">@Model.Name</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<h3 class="content-subtitle">About us</h3>
+	<div class="row mb-3">
+		<div class="col-12 col-md-6 flex-col">
+			<multiline text="@Model.About"></multiline>
+			<span><strong>Ticket price:</strong> @Model.Price$</span>
+		</div>
+		<div class="col-12 col-md-6 text-center">
+			<img class="img-fluid rounded" src="~/images/@Model.Photo.FilePath" alt="Our cinema" />
+		</div>
+	</div>
+
+	<h3 class="content-subtitle">Halls</h3>
+	@if (Model.Halls.Count > 0)
+	{
+		<div class="row justify-content-start mb-3">
+			<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+				<table class="table table-sm table-hover">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Rows</th>
+							<th>Seats</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (Hall hall in Model.Halls.Take(5))
+						{
+							<tr>
+								<td><a asp-area="Admin" asp-controller="Halls" asp-action="Info" asp-route-id="@hall.ID">@hall.Name</a></td>
+								<td>@hall.Rows</td>
+								<td>@hall.Cols</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	}
+	else
+	{
+		<p>There are no halls on this cinema.</p>
+	}
+
+	<h3 class="content-subtitle">Gallery photos</h3>
+	@if (Model.Gallery.Count > 0)
+	{
+		<div class="row justify-content-start mb-3">
+			<div class="col-12 col-md-6">
+				<table class="table table-sm table-hover">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Title</th>
+							<th>Image</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (PhotoGal photo in Model.Gallery.Where(ph => ph.IsActive == true).Take(5))
+						{
+							<tr>
+								<td><a asp-area="Admin" asp-controller="Gallery" asp-action="Info" asp-route-id="@photo.ID">@photo.ID</a></td>
+								<td>@photo.Title</td>
+								<td><img class="admin-table-img" src="~/images/@photo.Photo.FilePath" /></td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	}
+	else
+	{
+		<p>There are no photos in this cinema gallery.</p>
+	}
+
+	<h3 class="content-subtitle">Location</h3>
+	<div class="row align-items-stretch">
+		<div class="col-12 col-md-5">
+			<location address="@Model.Location.Address" city="@Model.Location.City"></location>
+			<h3 class="content-subtitle">How to get here</h3>
+			<multiline text="@Model.Location.Directions"></multiline>
+		</div>
+		<div class="col-12 col-md-7 text-center">
+			<img class="img-fluid rounded" src="~/images/@Model.Location.Map.FilePath" alt="Map" />
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<a asp-action="Index" class="btn btn-secondary">Back to list</a>
+<a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning mx-3">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-danger">Delete</a>
+
+

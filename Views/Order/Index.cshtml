@@ -1,0 +1,66 @@
+﻿@model NewOrderViewModel
+
+@{
+	ViewData["Title"] = "Order - New order";
+}
+
+<div class="content-section">
+	<h2 class="content-title">Order Tickets</h2>
+	@Html.Partial("_Alert")
+	<h3 class="content-subtitle">Choose Show</h3>
+	<p class="border-info order-directions">
+		This is our shows table.<br />
+		The table is sorted by movie and dates.<br />
+		Please choose your preference for the table to be filtered.<br />
+		Please click on the show you want to continue to order tickets.
+	</p>
+	<hr />
+
+	<!-- Steps bar -->
+	<div class="order-steps-bar d-none d-md-flex mb-3">
+		<span class="order-step active">
+			<i class="fa fa-ticket"></i> Choose show
+		</span>
+		<span class="order-step">
+			<i class="fa fa-ticket"></i> Choose seats &amp; Payment
+		</span>
+		<span class="order-step">
+			<i class="fa fa-ticket"></i> Invoice
+		</span>
+	</div>
+
+	<!-- Filter bar -->
+	<div class="row align-items-center mb-3">
+		<div class="col-12 col-sm-5 col-md-4 col-lg-3">
+			<div class="order-filter-item">
+				<label for="order-sel-movie" class="mr-1">
+					<i class="fa fa-film" aria-hidden="true"></i>
+				</label>
+				<select id="order-sel-movie" class="form-control" asp-items="ViewBag.Movies">
+					<option selected="selected" value="0">All Movies</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-12 col-sm-5 col-md-4 col-lg-3">
+			<div class="order-filter-item">
+				<label for="order-sel-date" class="mr-1">
+					<i class="fa fa-calendar" aria-hidden="true"></i>
+				</label>
+				<select id="order-sel-date" class="form-control" asp-items="ViewBag.Dates"></select>
+			</div>
+		</div>
+		<div class="col-12 col-sm-2">
+			<div class="order-filter-item">
+				<input id="order-filter" type="button" value="Filter" class="btn btn-success" />
+			</div>
+		</div>
+	</div>
+
+	<!-- Shows table -->
+	<div id="order-shows-list" class="mb-3">
+		@{ Html.RenderPartial("_ShowsTable", Model.ShowsTable); }
+	</div>
+</div>
+
+
+

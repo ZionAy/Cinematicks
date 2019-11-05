@@ -1,0 +1,70 @@
+﻿@model Promo
+
+@{
+	ViewData["Title"] = "Admin - Create Promo";
+}
+
+<div class="content-section">
+	<h2 class="content-title">Create new promo</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<form asp-action="Create" role="form">
+		<div class="row">
+			<div asp-validation-summary="ModelOnly" class="col-12 text-danger"></div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-md-6">
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-md-6">
+				<label asp-for="Description" class="control-label"></label>
+				<textarea asp-for="Description" rows="5" class="form-control"></textarea>
+				<span asp-validation-for="Description" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="StartTime" class="control-label"></label>
+				<input asp-for="StartTime" class="form-control" />
+				<span asp-validation-for="StartTime" class="text-danger"></span>
+			</div>
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="EndTime" class="control-label"></label>
+				<input asp-for="EndTime" class="form-control" />
+				<span asp-validation-for="EndTime" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="BannerID" class="control-label"></label>
+				<select id="admin-image-select" asp-for="BannerID" class="form-control" asp-items="ViewBag.BannerID">
+					<option selected="selected" disabled="disabled">Choose Banner...</option>
+				</select>
+				<span asp-validation-for="BannerID" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div id="admin-image-preview" class="col-12 col-sm-6 col-md-4 col-lg-3"></div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 text-center">
+				<input type="submit" value="Create!" class="btn btn-success" />
+			</div>
+		</div>
+	</form>
+</div>
+
+<hr />
+
+<div>
+	<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

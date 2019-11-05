@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Genre>
+
+@{
+	ViewData["Title"] = "Admin - Genres";
+}
+
+<div class="content-section">
+	<h2 class="content-title">Genres</h2>
+	@Html.Partial("_Alert")
+	<div class="admin-page-bar">
+		<a asp-action="Create" class="btn btn-primary">New Genre</a>
+		<form asp-action="Index" class="form-inline search-form">
+			<input type="search" placeholder="Search for genre..." aria-label="Search for" name="find" class="search-control" />
+			<button type="submit" class="btn btn-success search-button">
+				<i class="fa fa-search" aria-hidden="true"></i>
+			</button>
+		</form>
+	</div>
+	<hr />
+
+	<div class="row align-items-stretch">
+		@if (Model.Count() > 0)
+		{
+			@foreach (Genre genre in Model)
+			{
+				<div class="col-12 col-sm-6 col-md-4 col-lg-3 align-items-stretch">
+					<div class="admin-card">
+						<h3 class="admin-card-header">@genre.Name</h3>
+						<div class="admin-card-body">
+							<span><strong>Movies:</strong> @genre.Movies.Count</span>
+							<span><strong>Show in menu:</strong> @genre.InMenu.ToString()</span>
+							<span><strong>Description:</strong> @genre.Description</span>
+						</div>
+						<div class="admin-card-footer">
+							<a asp-action="Edit" asp-route-id="@genre.ID" class="btn btn-warning">Edit</a>
+							<a asp-action="Info" asp-route-id="@genre.ID" class="btn btn-info mx-1">Info</a>
+							<a asp-action="Delete" asp-route-id="@genre.ID" class="btn btn-danger">Delete</a>
+						</div>
+					</div>
+				</div>
+			}
+		}
+		else
+		{
+			<div class="col">
+				<p>There are no genres.</p>
+			</div>
+		}
+	</div>
+</div>
+
+<hr />
+
+<a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="btn btn-secondary">Back to dashboard</a>

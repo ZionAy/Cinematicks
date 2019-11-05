@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Genre>
+
+<div class="dropdown-menu" aria-labelledby="movies-cat-menu">
+	<a asp-area="" asp-controller="Movies" asp-action="Index" class="dropdown-item">All movies</a>
+	<a asp-area="" asp-controller="Movies" asp-action="Kids" class="dropdown-item">Kids movies</a>
+	<a asp-area="" asp-controller="Movies" asp-action="ComingSoon" class="dropdown-item">Coming soon</a>
+	<div class="dropdown-divider"></div>
+	@foreach (Genre genre in Model)
+	{
+		<a asp-area="" asp-controller="Movies" asp-action="Genre" asp-route-id="@genre.ID" class="dropdown-item">@genre.Name movies</a>
+	}
+</div>

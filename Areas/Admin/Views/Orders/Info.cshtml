@@ -1,0 +1,82 @@
+﻿@model Order
+
+@{
+	ViewData["Title"] = "Admin - Order Info";
+	var showInfo = Model.Tickets.First().Show;
+	var numTicket = 0;
+}
+
+<div class="content-section">
+	<h2 class="content-title">Order #@Model.ID</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<h3 class="content-subtitle">Billing info</h3>
+	<div class="row mb-3">
+		<div class="col-12 col-sm-6 col-md-4 col-lg-3 flex-col">
+			<span><strong>Client info:</strong></span>
+			<span>@Model.Payment.FirstName @Model.Payment.LastName</span>
+			<span>@Model.Payment.Address, </span>
+			<span>@Model.Payment.City </span>
+			<span>@Model.Payment.ZipCode</span>
+		</div>
+		<div class="col-12 col-sm-6 col-md-4 col-lg-3 flex-col">
+			<span><strong>Invoice number:</strong></span>
+			<span>@Model.ID.ToString("000000000000")</span>
+			<span><strong>Issued on:</strong></span>
+			<span>@Model.OrderTime.ToString("dd/MM/yyyy")</span>
+			<span>@Model.OrderTime.ToString("HH:mm:ss")</span>
+		</div>
+	</div>
+
+	<hr />
+
+	<h3 class="content-subtitle">Order details:</h3>
+	<div class="flex-col">
+		<span><strong>Movie:</strong> @showInfo.Movie.Title</span>
+		<span><strong>Hall:</strong> @showInfo.Hall.Cinema.Name - @showInfo.Hall.Name</span>
+		<span><strong>Show time:</strong> @showInfo.TimeShow</span>
+	</div>
+	<div class="row justify-content-start mb-3">
+		<div class="col-12 col-md-6">
+			<table class="table table-sm table-hover">
+				<thead>
+					<tr>
+						<th>Ticket</th>
+						<th>Row</th>
+						<th>Seat</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (Ticket ticket in Model.Tickets.OrderBy(t => t.Row).ThenBy(t => t.Col))
+					{
+						numTicket++;
+						<tr>
+							<td>#@numTicket</td>
+							<td>@Convert.ToChar(ticket.Row + 64)</td>
+							<td>@ticket.Col</td>
+							<td>@showInfo.Hall.Cinema.Price$</td>
+						</tr>
+					}
+					<tr>
+						<td colspan="3" class="text-right"><strong>Total:</strong></td>
+						<td><strong>@(numTicket * showInfo.Hall.Cinema.Price)$</strong></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<h3 class="content-subtitle">Payment details</h3>
+	<div class="flex-col">
+		<span>Paid with credit card:</span>
+		<span>****-****-****-@Model.Payment.CCNum.Substring(@Model.Payment.CCNum.Length - 4, 4)</span>
+	</div>
+</div>
+
+<hr />
+
+<a asp-action="Index" class="btn btn-secondary">Back to list</a>
+<a asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-danger">Delete</a>
+
+

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Promo>
+
+@{
+	ViewData["Title"] = "Promos";
+}
+
+
+<div class="content-section">
+	<h2 class="content-title">Our promotions</h2>
+	@foreach (Promo promo in Model)
+	{
+		<h3 class="content-subtitle">@promo.Name</h3>
+		<div class="row mb-3">
+			<div class="col-12 col-md-6">
+				<multiline text="@promo.Description" class="promo-info"></multiline>
+				<p class="promo-dates">
+					<strong>Running on: </strong>
+					@promo.StartTime.ToString("dd/MM/yyyy") - @promo.EndTime.ToString("dd/MM/yyyy").
+				</p>
+			</div>
+			<div class="col-12 col-md-6">
+				<img class="img-fluid rounded" src="~/images/@promo.Banner.FilePath" alt="Promo banner" />
+			</div>
+		</div>
+	}
+</div>
+

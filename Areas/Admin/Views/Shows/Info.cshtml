@@ -1,0 +1,33 @@
+﻿@model Show
+
+@{
+	ViewData["Title"] = "Admin - Show Info";
+}
+
+<div class="content-section">
+	<h2 class="content-title">@Model.ID</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<h3 class="content-subtitle">Show details</h3>
+	<div class="row mb-3">
+		<div class="col-12 col-md-3 text-center">
+			<img class="img-fluid rounded" src="~/images/@Model.Movie.Poster.FilePath" alt="Our cinema" />
+		</div>
+		<div class="col-12 col-md-9 flex-col">
+			<span><strong>Hall:</strong> @Model.Hall.Name - @Model.Hall.Cinema.Name</span>
+			<span><strong>Movie:</strong> @Model.Movie.Title</span>
+			<span><strong>Starting on:</strong> @Model.TimeShow</span>
+			<span><strong>Tickets booked:</strong> @Model.Tickets.Count</span>
+			<span><strong>Duration:</strong> @Model.Movie.Time mins</span>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<a asp-action="Index" class="btn btn-secondary">Back to list</a>
+<a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning mx-3">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-danger">Delete</a>
+
+
+

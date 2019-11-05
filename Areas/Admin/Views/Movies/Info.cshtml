@@ -1,0 +1,88 @@
+﻿@model Movie
+
+@{
+	ViewData["Title"] = "Admin - Movie Info";
+}
+
+<div class="content-section">
+	<h2 class="content-title">@Model.Title</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<h3 class="content-subtitle">Movie details</h3>
+	<div class="row mb-3">
+		<div class="col-12 col-md-4 text-center">
+			<img class="img-fluid rounded" src="~/images/@Model.Poster.FilePath" alt="Movie poster" />
+		</div>
+		<div class="col-12 col-md-8 flex-col">
+			<span><strong>Released on:</strong> @Model.Release.ToString("dd/MM/yyyy")</span>
+			<span><strong>Duration:</strong> @Model.Time minutes.</span>
+			<span><strong>Rate:</strong> @Model.Rate.Code</span>
+			<span><strong>Dubbed:</strong> @Model.IsDub.ToString()</span>
+			<span><strong>Director:</strong> @Model.Director</span>
+			<span><strong>Starring:</strong> @Model.Actors</span>
+			<span>
+				<strong>Trailer: </strong>
+				<a href="https://www.youtube.com/watch?v=@Model.Trailer" target="_blank">Open trailer</a>
+			</span>
+			<span><strong>Plot:</strong></span>
+			<multiline text="@Model.Plot"></multiline>
+		</div>
+	</div>
+
+	<h3 class="content-subtitle">Genres</h3>
+	<div class="row justify-content-start">
+		<div class="col-12 col-md-8">
+			<table class="table table-sm table-hover">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (MovGen mg in Model.Genres.Take(5))
+					{
+						<tr>
+							<td><a asp-area="Admin" asp-controller="Genres" asp-action="Info" asp-route-id="@mg.GenreID">@mg.Genre.Name</a></td>
+							<td>@mg.Genre.Description</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<h3 class="content-subtitle">Reviews</h3>
+	<div class="row justify-content-start">
+		<div class="col-12 col-md-6">
+			<table class="table table-sm table-hover">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Time</th>
+						<th>Client</th>
+						<th>Rating</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (Review review in Model.Reviews.OrderByDescending(rv => rv.PostTime).Take(5))
+					{
+						<tr>
+							<td><a asp-area="Admin" asp-controller="Reviews" asp-action="Info" asp-route-id="@review.ID">@review.ID</a></td>
+							<td>@review.PostTime.ToString("dd/MM/yyyy\nHH:mm")</td>
+							<td>@review.Client.UserName</td>
+							<td>@review.Rating</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<a asp-action="Index" class="btn btn-secondary">Back to list</a>
+<a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning mx-3">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-danger">Delete</a>
+

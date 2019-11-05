@@ -1,0 +1,109 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<Client> SignInManager
+@inject UserManager<Client> UserManager
+
+@model Movie
+
+@{ ViewData["Title"] = Model.Title; }
+
+<div class="content-section">
+	<h2 class="content-title">@Model.Title</h2>
+	<div class="row">
+		<div class="col-12 col-sm-6 col-md-4">
+			<img class="img-fluid rounded" src="~/images/@Model.Poster.FilePath" alt="@Model.Title Poster" />
+		</div>
+		<div class="col-12 col-sm-6 col-md-8">
+			<div class="movie-details">
+				<div>
+					<a asp-area="" asp-controller="Order" asp-action="Index" asp-route-movieID="@Model.ID" class="btn btn-danger">Order tickets</a>
+				</div>
+				<p class="movie-details-item">
+					<strong>Genres:</strong>
+					@foreach (MovGen mg in Model.Genres)
+					{
+						<span class="movie-details-genre">
+							<a asp-area="" asp-controller="Movies" asp-action="Genre" asp-route-id="@mg.GenreID">@mg.Genre.Name</a>
+						</span>
+					}
+				</p>
+				<p class="movie-details-item">
+					<strong>Rated:</strong>
+					<span>@Model.Rate.Code (@Model.Rate.Description).</span>
+				</p>
+				<p class="movie-details-item">
+					<strong>Duration:</strong>
+					<span>@Model.Time minutes.</span>
+				</p>
+				<p class="movie-details-item">
+					<strong>On cinemas:</strong>
+					<span>@Model.Release.ToString("dd/MM/yyyy").</span>
+				</p>
+				@if (Model.IsDub)
+				{
+					<p class="movie-details-item">
+						<strong class="text-danger">This movie is dubbed.</strong>
+					</p>
+				}
+				<div class="movie-details-divider"></div>
+				<p class="movie-details-item">
+					<strong>Directed by:</strong>
+					<span>@Model.Director.</span>
+				</p>
+				<p class="movie-details-item">
+					<strong>Starring:</strong>
+					<span>@Model.Actors.</span>
+				</p>
+				<div class="movie-details-divider"></div>
+				<div class="movie-details-item">
+					<strong>Plot:</strong>
+					<multiline text="@Model.Plot"></multiline>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row justify-content-center content-section">
+		<div class="col-12 col-md-10 col-lg-8">
+			<h3 class="content-subtitle text-center">Movie trailer</h3>
+			<div class="embed-responsive embed-responsive-16by9 content-box" id="movie-trailer">
+				<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/@Model.Trailer" name="youtubevideotrailer" title="youtubevideo" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+			</div>
+		</div>
+	</div>
+	<div id="movie-reviews" class="row content-section">
+		<div class="col-12">
+			<h3 class="content-subtitle">Movie Reviews</h3>
+			@Html.Partial("_Alert")
+			@Html.Partial("_UserReviewForm", new Review { MovieID = Model.ID })
+
+			@if (Model.Reviews.Count > 0) {
+				<ul class="list-unstyled">
+				@foreach (Review review in Model.Reviews.OrderByDescending(rv => rv.PostTime))
+				{
+					<li class="media movie-review-item">
+						<img src="~/images/@review.Client.Avatar.FilePath" alt="User avatar" />
+						<div class="media-body">
+							<p class="movie-review-details">
+								<span class="movie-review-client">@review.Client.UserName</span>
+								<span class="movie-review-date">@review.PostTime.ToString("dd/MM/yyyy HH:mm")</span>
+							</p>
+							<stars rating="@review.Rating" class="movie-review-details"></stars>
+							<multiline text="@review.Comment" class="movie-review-details"></multiline>
+						</div>
+					</li>
+				}
+				</ul>
+			}
+			else
+			{
+				<p>There are no reviews for this movie at the moment.</p>
+			}
+		</div>
+	</div>
+</div>
+
+
+
+
+

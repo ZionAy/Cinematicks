@@ -1,0 +1,71 @@
+﻿@model InfoViewModel
+
+@{
+	ViewData["Title"] = "About us";
+}
+
+
+<div class="content-section">
+	<h2 class="content-title">About us</h2>
+	<div class="row">
+		<div class="col-12 col-md-6">
+			<multiline text="@Model.Cinema.About"></multiline>
+		</div>
+		<div class="col-12 col-md-6 text-center">
+			<img class="img-fluid rounded" src="~/images/@Model.Cinema.Photo.FilePath" alt="Our cinema" />
+		</div>
+	</div>
+</div>
+
+
+@if (Model.Gallery.Count > 0)
+{
+	var first = 1;
+	<div class="content-section">
+		<h2 class="content-title">Our gallery</h2>
+		<div id="site-gallery" class="row no-gutters align-items-stretch">
+			<div class="col-12 col-md-6">
+				<div id="gallery-main" class="tab-content">
+					@foreach (PhotoGal photo in Model.Gallery)
+					{
+						<div id="gImg-@photo.ID" class="tab-pane fade@(first-- == 1 ? " show active" : "")" role="tabpanel" aria-label="Gallery photo">
+							<img class="gallery-photo" src="~/images/@photo.Photo.FilePath" alt="Gallery photo" />
+							<h3 class="gallery-photo-title">@photo.Title</h3>
+							@if (photo.Description.Length > 0)
+							{
+								<p class="gallery-photo-desc">@photo.Description</p>
+							}
+						</div>
+					}
+				</div>
+			</div>
+			<div class="col-12 col-md-6">
+				<div id="gallery-nav" class="nav nav-tabs" role="tablist">
+					@{ first = 1; }
+					@foreach (PhotoGal photo in Model.Gallery)
+					{
+						<a class="gallery-menu-item" data-toggle="tab" href="#gImg-@photo.ID" role="tab" aria-controls="gImg-@photo.ID" aria-selected="@(first-- == 1 ? "true" : "false")">
+							<img class="img-thumbnail" src="~/images/@photo.Photo.FilePath" alt="@photo.Title link" />
+						</a>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+
+<div class="content-section">
+	<h2 class="content-title">Our location</h2>
+	<div class="row align-items-stretch">
+		<div class="col-12 col-md-5">
+			<location address="@Model.Cinema.Location.Address" city="@Model.Cinema.Location.City"></location>
+			<h3 class="content-subtitle">How to get here</h3>
+			<multiline text="@Model.Cinema.Location.Directions"></multiline>
+		</div>
+		<div class="col-12 col-md-7">
+			<img class="img-fluid rounded" src="~/images/@Model.Cinema.Location.Map.FilePath" alt="Map" />
+		</div>
+	</div>
+</div>
+

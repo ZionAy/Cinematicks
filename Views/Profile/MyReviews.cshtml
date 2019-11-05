@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Review>
+
+@{
+	ViewData["Title"] = "Profile - My Reviews";
+	Layout = "_MyProfileLayout";
+	var numReview = 0;
+}
+
+<div class="content-section">
+	<h2 class="profile-title">My reviews</h2>
+	<hr />
+
+	<div class="flex-col mb-3">
+		<span>This is a list of your reviews.</span>
+		<span>The list contains short summary of the reviews.</span>
+		<span>Thank you and enjoy.</span>
+	</div>
+
+	<h3 class="profile-subtitle">Reviews list</h3>
+	<div class="row justify-content-start">
+		<div class="col-12">
+			<table class="table table-sm table-hover">
+				<thead>
+					<tr>
+						<th>Review</th>
+						<th>Time</th>
+						<th>Rating</th>
+						<th>Movie</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (Review review in Model)
+					{
+						numReview++;
+						<tr>
+						<td> @numReview </td>
+						<td> @review.PostTime.ToString("dd/MM/yyyy HH:mm") </td>
+						<td> @review.Rating </td>
+						<td> @review.Movie.Title </td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<a asp-action="Index" class="btn btn-secondary">Back to profile</a>
+
+

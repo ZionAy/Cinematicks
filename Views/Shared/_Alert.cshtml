@@ -1,0 +1,9 @@
+﻿@if (TempData.ContainsKey("Status") && TempData.ContainsKey("Color"))
+{
+	<div class="alert alert-@TempData["Color"] alert-dismissible fade show status-alert" role="alert">
+		<multiline text="@TempData["Status"]"></multiline>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+}

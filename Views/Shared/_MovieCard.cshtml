@@ -1,0 +1,51 @@
+﻿@model Movie
+
+<div class="movie-card">
+	<h3 class="movie-card-header">@Model.Title</h3>
+	<div class="movie-card-body">
+		<div class="movie-card-front">
+			<img class="img-fluid" src="~/images/@Model.Poster.FilePath" alt="@Model.Title Poster" />
+		</div>
+		<div class="movie-card-back">
+			<div class="movie-card-info">
+				<p class="movie-card-item movie-card-genres">
+					@foreach (MovGen mg in Model.Genres)
+					{
+						<span>
+							<a asp-area="" asp-controller="Movies" asp-action="Genre" asp-route-id="@mg.GenreID">@mg.Genre.Name</a>
+						</span>
+					}
+				</p>
+				<p class="movie-card-item movie-card-ratetime">
+					<img src="~/images/@Model.Rate.Image.FilePath" alt="Movie rate" title="@Model.Rate.Description" />
+					<span>@Model.Time mins</span>
+				</p>
+				<p class="movie-card-item movie-card-people">
+					<span><strong>Director:</strong> @Model.Director</span>
+					<span><strong>Starring:</strong> @Model.Actors</span>
+				</p>
+				<div class="movie-card-item movie-card-plot">
+					<span><strong>Plot:</strong></span>
+					<multiline text="@Model.Plot"></multiline>
+				</div>
+				<div class="movie-card-buttons">
+					<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modal-trailer" data-youtube="@Model.Trailer" title="Watch trailer">
+						<i class="fa fa-youtube-play"></i> Trailer
+					</button>
+					<a asp-area="" asp-controller="Movies" asp-action="Movie" asp-route-id="@Model.ID" class="btn btn-outline-info">
+						<i class="fa fa-info-circle"></i> Info
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="movie-card-footer">
+		<a asp-area="" asp-controller="Movies" asp-action="Movie" asp-route-id="@Model.ID" asp-fragment="movie-reviews" class="movie-card-reviews">
+			<span class="badge badge-dark"><i class="fa fa-commenting-o"></i> @(Model.Reviews.Count > 0 ? Model.Reviews.Count : 0)</span>
+			<span class="badge badge-warning"><i class="fa fa-star"></i> @(Model.Reviews.Count > 0 ? Math.Round(Model.Reviews.Average(rv => rv.Rating), 1) : 0)</span>
+		</a>
+		<a asp-area="" asp-controller="Order" asp-action="Index" asp-route-movieID="@Model.ID">
+			<span class="badge badge-primary"><i class="fa fa-tags"></i> Tickets</span>
+		</a>
+	</div>
+</div>

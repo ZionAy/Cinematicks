@@ -1,0 +1,89 @@
+﻿@model Client
+
+
+@inject UserManager<Client> UserManager
+
+@{
+	ViewData["Title"] = "Admin - Client Info";
+}
+
+<div class="content-section">
+	<h2 class="content-title">@Model.UserName</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<h3 class="content-subtitle">Client details</h3>
+	<div class="row">
+		<div class="col-12 col-md-3 text-center">
+			<img class="img-fluid rounded" src="~/images/@Model.Avatar.FilePath" alt="Client avatar" />
+		</div>
+		<div class="col-12 col-md-9 flex-col">
+			<span><strong>Email:</strong> @Model.Email</span>
+			<span><strong>Confirmed user:</strong> @Model.EmailConfirmed.ToString()</span>
+			<span><strong>Registered on:</strong> @Model.RegisterTime.ToString("dd/MM/yyyy HH:mm")</span>
+			@if (await UserManager.IsInRoleAsync(Model, "Admin"))
+			{
+				<span><strong>This user is an administrator.</strong></span>
+			}
+		</div>
+	</div>
+
+	<h3 class="content-subtitle">Orders</h3>
+	<div class="row justify-content-start">
+		<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+			<table class="table table-sm table-hover">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Date</th>
+						<th>Tickets</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (Order order in Model.Orders.OrderByDescending(o => o.OrderTime).Take(5))
+					{
+						<tr>
+							<td><a asp-area="Admin" asp-controller="Orders" asp-action="Info" asp-route-id="@order.ID">@order.ID</a></td>
+							<td>@order.OrderTime.ToString("dd/MM/yyyy\nHH:mm")</td>
+							<td>@order.Tickets.Count</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<h3 class="content-subtitle">Reviews</h3>
+	<div class="row justify-content-start">
+		<div class="col-12 col-md-6">
+			<table class="table table-sm table-hover">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Date</th>
+						<th>Movie</th>
+						<th>Rating</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (Review review in Model.Reviews.OrderByDescending(rv => rv.PostTime).Take(5))
+					{
+						<tr>
+							<td><a asp-area="Admin" asp-controller="Reviews" asp-action="Info" asp-route-id="@review.ID">@review.ID</a></td>
+							<td>@review.PostTime.ToString("dd/MM/yyyy\nHH:mm")</td>
+							<td>@review.Movie.Title</td>
+							<td>@review.Rating</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<a asp-action="Index" class="btn btn-secondary">Back to list</a>
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mx-3">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+
+

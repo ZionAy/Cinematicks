@@ -1,0 +1,24 @@
+﻿@{
+	Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+	<div class="row">
+		<div id="profile-nav" class="col-md-3">
+			<div class="nav nav-pills flex-column">
+				<a asp-action="Index" class="nav-link profile-nav-item">My profile</a>
+				<a asp-action="Edit" class="nav-link profile-nav-item">Edit profile</a>
+				<a asp-action="ChangePassword" class="nav-link profile-nav-item">Change password</a>
+				<a asp-action="MyOrders" class="nav-link profile-nav-item">My orders</a>
+				<a asp-action="MyReviews" class="nav-link profile-nav-item">My reviews</a>
+			</div>
+		</div>
+		<div class="col-md-9">
+			@RenderBody()
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	@RenderSection("Scripts", required: false)
+}

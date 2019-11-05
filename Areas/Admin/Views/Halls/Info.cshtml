@@ -1,0 +1,53 @@
+﻿@model Hall
+
+@{
+	ViewData["Title"] = "Admin - Hall Info";
+}
+
+<div class="content-section">
+	<h2 class="content-title">@Model.Name</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<h3 class="content-subtitle">Details</h3>
+	<div class="flex-col mb-3">
+		<span><strong>In cinema:</strong> @Model.Cinema.Name</span>
+		<span><strong>Rows:</strong> @Model.Rows</span>
+		<span><strong>Seats in row:</strong> @Model.Cols</span>
+	</div>
+
+	<h3 class="content-subtitle">Shows</h3>
+	<div class="row justify-content-start">
+		<div class="col-12 col-md-6">
+			<table class="table table-sm table-hover">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Date</th>
+						<th>Movie</th>
+						<th>Tickets</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (Show show in Model.Shows.Where(s => s.ShowDate >= DateTime.Today).OrderBy(s => s.ShowDate).ThenBy(s => s.ShowTime).Take(5))
+					{
+						<tr>
+							<td><a asp-area="Admin" asp-controller="Shows" asp-action="Info" asp-route-id="@show.ID">@show.ID</a></td>
+							<td>@show.ShowDate.ToString("dd/MM/yyyy")<br />@show.ShowTime.ToString(@"hh\:mm")</td>
+							<td>@show.Movie.Title</td>
+							<td>@show.Tickets.Count</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<a asp-action="Index" class="btn btn-secondary">Back to list</a>
+<a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning mx-3">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-danger">Delete</a>
+
+
+

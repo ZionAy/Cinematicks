@@ -1,0 +1,56 @@
+﻿@model Location
+
+@{
+	ViewData["Title"] = "Admin - Location Info";
+}
+
+
+<div class="content-section">
+	<h2 class="content-title">@Model.FullAddress</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<h3 class="content-subtitle">Location details</h3>
+	<div class="row mb-3">
+		<div class="col-12 col-md-5 text-center">
+			<img class="img-fluid rounded" src="~/images/@Model.Map.FilePath" alt="Map" />
+		</div>
+		<div class="col-12 col-md-7 flex-col">
+			<span><strong>City:</strong> @Model.City</span>
+			<span><strong>Address:</strong> @Model.Address</span>
+			<span><strong>Cinemas:</strong> @Model.Cinemas.Count</span>
+			<span><strong>Directions:</strong></span>
+			<multiline text="@Model.Directions" class="mb-1"></multiline>
+		</div>
+	</div>
+
+	<h3 class="content-subtitle">Cinemas</h3>
+	<div class="row justify-content-start">
+		<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+			<table class="table table-sm table-hover">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Halls</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (Cinema cinema in Model.Cinemas.Take(5))
+					{
+						<tr>
+							<td>@cinema.ID</td>
+							<td><a asp-area="Admin" asp-controller="Cinemas" asp-action="Info" asp-route-id="@cinema.ID">@cinema.Name</a></td>
+							<td>@cinema.Halls.Count</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<a asp-action="Index" class="btn btn-secondary">Back to list</a>
+<a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning mx-3">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-danger">Delete</a>

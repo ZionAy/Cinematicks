@@ -1,0 +1,80 @@
+﻿@{
+	ViewData["Title"] = "FAQ";
+}
+
+
+<div class="content-section">
+	<h2 class="content-title">Frequently Asked Questions</h2>
+	<hr />
+	<div class="flex-col">
+		<span>This is our frequently asked questions page.</span>
+		<span>Please read the following information for help.</span>
+		<span>Click on the question to see the answer for it.</span>
+		<span>If you can't find the answer you are looking for, <a asp-action="Contact">contact us.</a></span>
+	</div>
+
+	<div id="faq-section">
+		<div class="faq-qa">
+			<h3 id="question01" class="faq-question" data-toggle="collapse" data-target="#answer01" aria-expanded="false" aria-controls="answer01">Do I have to register?</h3>
+			<div id="answer01" class="faq-answer collapse" aria-labelledby="question01" data-parent="#faq-section">
+				<div class="flex-col">
+					<span>The information on the movies are open to all clients.</span>
+					<span>But there are some sections on the site that are restricted to registered clients only, like adding a review or ordering tickets.</span>
+					<span>We recommend that you register, it's free.</span>
+				</div>
+			</div>
+		</div>
+		<div class="faq-qa">
+			<h3 id="question02" class="faq-question" data-toggle="collapse" data-target="#answer02" aria-expanded="false" aria-controls="answer02">How can i add review?</h3>
+			<div id="answer02" class="faq-answer collapse" aria-labelledby="question02" data-parent="#faq-section">
+				<div class="flex-col">
+					<span>In order to add review to a movie you need to log in to your account.</span>
+					<span>After you logged in to your account, click on the "Info" button on the movie card you want to review.</span>
+					<span>Under the "Movie reviews" section click on the "Add review" button and fill out the form.</span>
+					<span>Keep in mind that you can add just one review for each movie.</span>
+				</div>
+			</div>
+		</div>
+		<div class="faq-qa">
+			<h3 id="question03" class="faq-question" data-toggle="collapse" data-target="#answer03" aria-expanded="false" aria-controls="answer03">I can't login after registered</h3>
+			<div id="answer03" class="faq-answer collapse" aria-labelledby="question03" data-parent="#faq-section">
+				<div class="flex-col">
+					<span>After you register to our site, an email sent to you for the registration confirmation.</span>
+					<span>Check your email for that confirmation email, and click on the link in this email.</span>
+					<span>After you confirm your registration you'll be able to log in to your account.</span>
+				</div>
+			</div>
+		</div>
+		<div class="faq-qa">
+			<h3 id="question04" class="faq-question" data-toggle="collapse" data-target="#answer04" aria-expanded="false" aria-controls="answer04">How can I order tickets for a show?</h3>
+			<div id="answer04" class="faq-answer collapse" aria-labelledby="question04" data-parent="#faq-section">
+				<div class="flex-col">
+					<span>In order to order tickets to a show you need to log in to your account.</span>
+					<span>After you logged in to your account, you can click on the "Order" option on the top menu or click on the "Order tickets" button on the movie page or movie card.</span>
+					<span>Then select a show from the list, choose your seats in the hall and fill out the payment details.</span>
+				</div>
+			</div>
+		</div>
+		<div class="faq-qa">
+			<h3 id="question05" class="faq-question" data-toggle="collapse" data-target="#answer05" aria-expanded="false" aria-controls="answer05">How can i see my invoices?</h3>
+			<div id="answer05" class="faq-answer collapse" aria-labelledby="question05" data-parent="#faq-section">
+				<div class="flex-col">
+					<span>On "My profile" section there is an option to see all your orders.</span>
+					<span>You can click on one of the orders to see the invoice for that order.</span>
+				</div>
+			</div>
+		</div>
+		<div class="faq-qa">
+			<h3 id="question06" class="faq-question" data-toggle="collapse" data-target="#answer06" aria-expanded="false" aria-controls="answer06">I found an offensive review on the site</h3>
+			<div id="answer06" class="faq-answer collapse" aria-labelledby="question06" data-parent="#faq-section">
+				<div class="flex-col">
+					<span>If you find materials that offends you, contact us as soon as possible.</span>
+					<span>You can contact us by email, phone or contact us form.</span>
+					<span>Please provide us as many details as you can for us to fix that.</span>
+					<span>Keep in mind that reviews are added by clients and we do as much as we can to eliminate spam and offensive texts.</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

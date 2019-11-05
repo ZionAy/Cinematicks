@@ -1,0 +1,24 @@
+D:\OrtProj\Cinematicks\Cinematicks\bin\Debug\netcoreapp2.0\Cinematicks.deps.json
+D:\OrtProj\Cinematicks\Cinematicks\bin\Debug\netcoreapp2.0\Cinematicks.runtimeconfig.json
+D:\OrtProj\Cinematicks\Cinematicks\bin\Debug\netcoreapp2.0\Cinematicks.runtimeconfig.dev.json
+D:\OrtProj\Cinematicks\Cinematicks\bin\Debug\netcoreapp2.0\Cinematicks.dll
+D:\OrtProj\Cinematicks\Cinematicks\bin\Debug\netcoreapp2.0\Cinematicks.pdb
+D:\OrtProj\Cinematicks\Cinematicks\obj\Debug\netcoreapp2.0\Cinematicks.csprojResolveAssemblyReference.cache
+D:\OrtProj\Cinematicks\Cinematicks\obj\Debug\netcoreapp2.0\Cinematicks.csproj.CoreCompileInputs.cache
+D:\OrtProj\Cinematicks\Cinematicks\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+D:\OrtProj\Cinematicks\Cinematicks\obj\Debug\netcoreapp2.0\Cinematicks.AssemblyInfoInputs.cache
+D:\OrtProj\Cinematicks\Cinematicks\obj\Debug\netcoreapp2.0\Cinematicks.AssemblyInfo.cs
+D:\OrtProj\Cinematicks\Cinematicks\obj\Debug\netcoreapp2.0\Cinematicks.dll
+D:\OrtProj\Cinematicks\Cinematicks\obj\Debug\netcoreapp2.0\Cinematicks.pdb
+D:\Cinematicks\BackUp 19.3.2018\Cinematicks\Cinematicks final\Code\Cinematicks\Cinematicks\bin\Debug\netcoreapp2.0\Cinematicks.deps.json
+D:\Cinematicks\BackUp 19.3.2018\Cinematicks\Cinematicks final\Code\Cinematicks\Cinematicks\bin\Debug\netcoreapp2.0\Cinematicks.runtimeconfig.json
+D:\Cinematicks\BackUp 19.3.2018\Cinematicks\Cinematicks final\Code\Cinematicks\Cinematicks\bin\Debug\netcoreapp2.0\Cinematicks.runtimeconfig.dev.json
+D:\Cinematicks\BackUp 19.3.2018\Cinematicks\Cinematicks final\Code\Cinematicks\Cinematicks\bin\Debug\netcoreapp2.0\Cinematicks.dll
+D:\Cinematicks\BackUp 19.3.2018\Cinematicks\Cinematicks final\Code\Cinematicks\Cinematicks\bin\Debug\netcoreapp2.0\Cinematicks.pdb
+D:\Cinematicks\BackUp 19.3.2018\Cinematicks\Cinematicks final\Code\Cinematicks\Cinematicks\obj\Debug\netcoreapp2.0\Cinematicks.csprojAssemblyReference.cache
+D:\Cinematicks\BackUp 19.3.2018\Cinematicks\Cinematicks final\Code\Cinematicks\Cinematicks\obj\Debug\netcoreapp2.0\Cinematicks.csproj.CoreCompileInputs.cache
+D:\Cinematicks\BackUp 19.3.2018\Cinematicks\Cinematicks final\Code\Cinematicks\Cinematicks\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+D:\Cinematicks\BackUp 19.3.2018\Cinematicks\Cinematicks final\Code\Cinematicks\Cinematicks\obj\Debug\netcoreapp2.0\Cinematicks.AssemblyInfoInputs.cache
+D:\Cinematicks\BackUp 19.3.2018\Cinematicks\Cinematicks final\Code\Cinematicks\Cinematicks\obj\Debug\netcoreapp2.0\Cinematicks.AssemblyInfo.cs
+D:\Cinematicks\BackUp 19.3.2018\Cinematicks\Cinematicks final\Code\Cinematicks\Cinematicks\obj\Debug\netcoreapp2.0\Cinematicks.dll
+D:\Cinematicks\BackUp 19.3.2018\Cinematicks\Cinematicks final\Code\Cinematicks\Cinematicks\obj\Debug\netcoreapp2.0\Cinematicks.pdb

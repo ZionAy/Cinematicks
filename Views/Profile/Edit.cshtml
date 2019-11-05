@@ -1,0 +1,56 @@
+﻿@model EditProfileViewModel
+
+@{
+	ViewData["Title"] = "Edit Profile";
+	Layout = "_MyProfileLayout";
+}
+
+<div class="content-section">
+	<h2 class="profile-title">Edit profile details</h2>
+	<form asp-action="Edit" role="form">
+		<div class="row">
+			<div asp-validation-summary="ModelOnly" class="col-12 text-danger"></div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="Username" class="control-label"></label>
+				<input asp-for="Username" class="form-control" />
+				<span asp-validation-for="Username" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="Email" class="control-label"></label>
+				<input asp-for="Email" class="form-control" />
+				<span asp-validation-for="Email" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
+				<label asp-for="AvatarID" class="control-label"></label>
+				<select id="avatar-select" asp-for="AvatarID" class="form-control" asp-items="ViewBag.AvatarID"></select>
+				<span asp-validation-for="AvatarID" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div id="avatar-preview" class="col-12 col-sm-6 col-md-4 col-lg-3">
+				<img class="img-fluid rounded" src="~/images/@Model.Avatar.FilePath" alt="User avatar" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12 text-center">
+				<input type="submit" value="Save!" class="btn btn-success" />
+			</div>
+		</div>
+	</form>
+</div>
+<hr />
+
+<div>
+	<a asp-action="Index" class="btn btn-secondary">Back to Profile</a>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -1,0 +1,30 @@
+﻿@model Promo
+
+@{
+	ViewData["Title"] = "Admin - Promo Info";
+}
+
+
+<div class="content-section">
+	<h2 class="content-title">@Model.Name</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<h3 class="content-subtitle">Promo details</h3>
+	<div class="row">
+		<div class="col-12 col-md-6 flex-col">
+			<span><strong>Starting on:</strong> @Model.StartTime.ToString("dd/MM/yyyy")</span>
+			<span><strong>Ending on:</strong> @Model.StartTime.ToString("dd/MM/yyyy")</span>
+			<span><strong>Banner:</strong></span>
+			<div>
+				<img class="img-fluid rounded" src="~/images/@Model.Banner.FilePath" alt="Our cinema" />
+			</div>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<a asp-action="Index" class="btn btn-secondary">Back to list</a>
+<a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning mx-3">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-danger">Delete</a>
+

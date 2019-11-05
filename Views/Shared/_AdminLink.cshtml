@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Cinematicks.Models
+
+@inject SignInManager<Client> SignInManager
+@inject UserManager<Client> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+	var client = await UserManager.GetUserAsync(User);
+	var isAdmin = await UserManager.IsInRoleAsync(client, "Admin");
+	if (isAdmin)
+	{
+		<li class="nav-item">
+			<a asp-area="Admin" asp-controller="Dashboard" asp-action="index" class="nav-link">
+				<i class="fa fa-gear" aria-hidden="true"></i> Admin
+			</a>
+		</li>
+	}
+}

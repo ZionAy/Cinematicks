@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Order>
+
+@{
+	ViewData["Title"] = "Delete";
+	Layout = "_MyProfileLayout";
+	var numOrder = 0;
+}
+
+<div class="content-section">
+	<h2 class="profile-title">My orders</h2>
+	<hr />
+
+	<div class="flex-col mb-3">
+		<span>This is a list of your orders.</span>
+		<span>The list contains short summary of the orders.</span>
+		<span>Click on the order number to view full details of the order.</span>
+		<span>Thank you and enjoy.</span>
+	</div>
+
+	<h3 class="profile-subtitle">Orders list</h3>
+	<div class="row justify-content-start">
+		<div class="col-12">
+			<table class="table table-sm table-hover">
+				<thead>
+					<tr>
+						<th>Order</th>
+						<th>Order Time</th>
+						<th>Movie</th>
+						<th>Show Time</th>
+						<th>Tickets</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (Order order in Model)
+					{
+						numOrder++;
+						<tr>
+							<td><a asp-area="" asp-controller="Order" asp-action="Invoice" asp-route-id="@order.ID">@numOrder</a></td>
+							<td>@order.OrderTime.ToString("dd/MM/yyyy HH:mm")</td>
+							<td>@order.Tickets.First().Show.Movie.Title</td>
+							<td>@order.Tickets.First().Show.TimeShow</td>
+							<td>@order.Tickets.Count</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<a asp-action="Index" class="btn btn-secondary">Back to profile</a>
+
+

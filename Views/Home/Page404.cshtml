@@ -1,0 +1,21 @@
+﻿
+@{ 
+	ViewData["Title"] = "Page Not Found";
+}
+
+
+<div class="content-section">
+	<div class="row">
+		<div class="col-12 text-center">
+			<h2 class="content-title">Oops!</h2>
+			<h3 class="content-subtitle">The page not found!</h3>
+			<div class="flex-col mb-3">
+				<span>Sorry, but the page you requested was not found.</span>
+				<span>If you think this is a mistake, <a asp-area="" asp-controller="Home" asp-action="Contact">contact us</a>.</span>
+			</div>
+			<a asp-area="" asp-controller="Home" asp-action="" class="btn btn-primary">
+				<i class="fa fa-home" aria-hidden="true"></i> Back To Homepage
+			</a>
+		</div>
+	</div>
+</div>

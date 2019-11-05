@@ -1,0 +1,86 @@
+﻿@model ContactViewModel
+
+@{
+	ViewData["Title"] = "Contact us";
+}
+
+<div class="content-section">
+	<h2 class="content-title">Contact us</h2>
+	<hr />
+	@Html.Partial("_Alert")
+	<div id="contact-us-page">
+		<div class="row mb-3">
+			<div class="col-12 text-center contact-info">
+				<span>If you need any help or have a question, don't be shy and contact us.</span>
+			</div>
+		</div>
+		<div class="row justify-content-around">
+			<div class="col-12 col-md-3">
+				<div class="flex-col text-center mb-3">
+					<div class="d-flex flex-row justify-content-center align-items-center">
+						<span class="contact-info-icon mr-2"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+						<span class="contact-info-title">Working hours:</span>
+					</div>
+					<span><strong>Every day: 10:00-22:00</strong></span>
+				</div>
+				<div class="flex-col text-center mb-3">
+					<div class="d-flex flex-row justify-content-center align-items-center">
+						<span class="contact-info-icon mr-2"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+						<span class="contact-info-title">E-mail us:</span>
+					</div>
+					<a class="contact-info-link" href="mailto:cinematicks1@gmail.com">cinematicks1@gamil.com</a>
+				</div>
+				<div class="flex-col text-center mb-3">
+					<div class="d-flex flex-row justify-content-center align-items-center">
+						<span class="contact-info-icon mr-2"><i class="fa fa-phone" aria-hidden="true"></i></span>
+						<span class="contact-info-title">Call us:</span>
+					</div>
+					<a class="contact-info-link" href="tel:03-7654321">03-7654321</a>
+				</div>
+				<div class="text-center">
+					<span><strong>Or fill out the form.</strong></span>
+				</div>
+			</div>
+
+			<div class="col-12 col-md-7 col-lg-5">
+				<form asp-action="Contact" role="form">
+					<div class="row">
+						<div asp-validation-summary="ModelOnly" class="col-12 text-danger"></div>
+					</div>
+					<div class="row">
+						<div class="form-group col-12 col-md-6">
+							<label asp-for="Fullname" class="control-label"></label>
+							<input asp-for="Fullname" class="form-control" />
+							<span asp-validation-for="Fullname" class="text-danger"></span>
+						</div>
+						<div class="form-group col-12 col-md-6">
+							<label asp-for="Phone" class="control-label"></label>
+							<input asp-for="Phone" class="form-control" />
+							<span asp-validation-for="Phone" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-12">
+							<label asp-for="Email" class="control-label"></label>
+							<input asp-for="Email" class="form-control" />
+							<span asp-validation-for="Email" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-12">
+							<label asp-for="Message" class="control-label"></label>
+							<textarea asp-for="Message" rows="5" class="form-control"></textarea>
+							<span asp-validation-for="Message" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-12 text-center">
+							<input type="submit" value="Send" class="btn btn-success" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</div>

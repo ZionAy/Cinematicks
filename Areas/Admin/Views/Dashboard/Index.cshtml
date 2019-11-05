@@ -1,0 +1,113 @@
+﻿@model DashViewModel
+
+@{
+	ViewData["Title"] = "Admin - Dashboard";
+}
+
+<h2 class="admin-page-title">Dashboard</h2>
+
+<div class="row">
+	<div class="col-12">
+		<div class="card bg-info text-white mb-3">
+			<h3 class="card-header dash-section">Summary</h3>
+			<div class="row card-body">
+				<div class="col-12 col-sm-6 col-md-3">
+					<div class="card bg-light text-dark mb-2">
+						<h4 class="card-header dash-title">Cinema</h4>
+						<div class="card-body dash-content">
+							<p class="dash-item"><span class="dash-subtitle">Name:</span>@Model.Cinema.Name</p>
+							<p class="dash-item"><span class="dash-subtitle">Halls:</span>@Model.Cinema.Halls.Count</p>
+							<p class="dash-item"><span class="dash-subtitle">Gallery:</span>@Model.Totals.GetValueOrDefault("Gallery")</p>
+							<p class="dash-item"><span class="dash-subtitle">Price:</span>@Model.Cinema.Price</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6 col-md-3">
+					<div class="card bg-light text-dark mb-2">
+						<h4 class="card-header dash-title">Totals</h4>
+						<div class="card-body dash-content">
+							<p class="dash-item"><span class="dash-subtitle">Clients:</span>@Model.Totals.GetValueOrDefault("Clients")</p>
+							<p class="dash-item"><span class="dash-subtitle">Movies:</span>@Model.Totals.GetValueOrDefault("Movies")</p>
+							<p class="dash-item"><span class="dash-subtitle">Genres:</span>@Model.Totals.GetValueOrDefault("Genres")</p>
+							<p class="dash-item"><span class="dash-subtitle">Rates:</span>@Model.Totals.GetValueOrDefault("Rates")</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 text-center">
+					<img class="img-fluid rounded" src="~/images/@Model.Cinema.Photo.FilePath" alt="Cinema photo" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-12">
+		<div class="card bg-danger text-white mb-3">
+			<h3 class="card-header dash-section">Weekly Stats</h3>
+			<div class="row card-body">
+				<div class="col-12 col-sm-6 col-md-4">
+					<div class="card bg-warning text-white mb-2">
+						<h4 class="card-header dash-title">Movies</h4>
+						<div class="card-body dash-content">
+							<p class="dash-item"><span class="dash-subtitle">Premiers:</span>@Model.Movies.GetValueOrDefault("Premiers")</p>
+							<p class="dash-item"><span class="dash-subtitle">Shows:</span>@Model.Movies.GetValueOrDefault("Shows")</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6 col-md-4">
+					<div class="card bg-info text-white mb-2">
+						<h4 class="card-header dash-title">Clients</h4>
+						<div class="card-body dash-content">
+							<p class="dash-item"><span class="dash-subtitle">Register:</span>@Model.Clients.GetValueOrDefault("Register")</p>
+							<p class="dash-item"><span class="dash-subtitle">Orders:</span>@Model.Clients.GetValueOrDefault("Orders")</p>
+							<p class="dash-item"><span class="dash-subtitle">Reviews:</span>@Model.Clients.GetValueOrDefault("Reviews")</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6 col-md-4">
+					<div class="card bg-success text-white mb-2">
+						<h4 class="card-header dash-title">Promos</h4>
+						<div class="card-body dash-content">
+							<p class="dash-item"><span class="dash-subtitle">Running:</span>@Model.Promos.GetValueOrDefault("Running")</p>
+							<p class="dash-item"><span class="dash-subtitle">Starting:</span>@Model.Promos.GetValueOrDefault("Starting")</p>
+							<p class="dash-item"><span class="dash-subtitle">Ending:</span>@Model.Promos.GetValueOrDefault("Ending")</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-12">
+		<div class="card bg-secondary text-white mb-3">
+			<h3 class="card-header dash-section">Cinema Details</h3>
+			<div class="row card-body">
+				<div class="col-12 col-md-6">
+					<div class="card bg-light text-dark mb-2">
+						<h4 class="card-header dash-title">About us</h4>
+						<div class="card-body dash-content">
+							<multiline text="@Model.Cinema.About" class="dash-item"></multiline>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6">
+					<div class="card bg-light text-dark mb-2">
+						<h4 class="card-header dash-title">Location</h4>
+						<div class="row no-gutters">
+							<div class="col-6">
+								<div class="card-body dash-content">
+									<location address="@Model.Cinema.Location.Address" city="@Model.Cinema.Location.City" class="dash-item"></location>
+									<span class="dash-subtitle">Directions:</span>
+									<multiline text="@Model.Cinema.Location.Directions" class="dash-item"></multiline>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="card-body dash-content">
+									<span class="dash-subtitle">Map:</span>
+									<img class="img-fluid rounded" src="~/images/@Model.Cinema.Location.Map.FilePath" alt="Map" />
+								</div>
+							</div>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
